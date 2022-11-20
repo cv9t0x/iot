@@ -5,7 +5,7 @@ int curr, prev;
 bool turn_on = false;
 bool next = false;
 int brightness = 255;
-int delay = 300;
+int delay_ms = 300;
 
 void setup(){
   pinMode(led_pin, OUTPUT);
@@ -20,10 +20,10 @@ void loop(){
     delay(10);
 
     curr = digitalRead(btn_pin);
-    long time = millis();
+    long time_ms = millis();
 
     while (digitalRead(btn_pin)){
-      if (millis() - time >= delay && turn_on){
+      if (millis() - time_ms >= delay_ms && turn_on){
         while (digitalRead(btn_pin)){
           if (next){
             brightness = min(brightness + 1, 255);
@@ -42,7 +42,7 @@ void loop(){
       delay(10);
     }
     
-    if (millis() - time < delay){
+    if (millis() - time_ms < delay_ms){
       if (curr){
           turn_on = !turn_on;
       }
